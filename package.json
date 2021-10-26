@@ -1,6 +1,6 @@
 {
     "name": "biometrics-core",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "",
     "keywords": [],
     "author": "Luis Manuel Amengual",
@@ -14,7 +14,7 @@
         "url": "https://github.com/luismanuelamengual/Biometrics-Core"
     },
     "files": [
-        "./dist"
+        "dist/*"
     ],
     "scripts": {
         "build": "tsc",
