@@ -1,6 +1,6 @@
 import {Api} from "./api";
 
-class LivenessApi extends Api {
+export class BiometricsApi extends Api {
 
     public async checkLiveness3d(faceImage: Blob, zoomedFaceImage: Blob): Promise<{liveness: boolean, status: number}> {
         const formData = new FormData();
@@ -11,4 +11,4 @@ class LivenessApi extends Api {
     }
 }
 
-export const Liveness = new LivenessApi();
+export const Biometrics = new BiometricsApi();

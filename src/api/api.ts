@@ -17,7 +17,7 @@ export abstract class Api {
     private _mockData: Array<MockItem>;
     private _apiKey: string;
 
-    protected get baseUrl(): string {
+    public get baseUrl(): string {
         let baseUrl = this._baseUrl;
         if (!baseUrl) {
             baseUrl = Properties.get(Api.BASE_URL_PROPERTY);
@@ -28,23 +28,23 @@ export abstract class Api {
         return baseUrl;
     }
 
-    protected set baseUrl(value: string) {
+    public set baseUrl(value: string) {
         this._baseUrl = value;
     }
 
-    protected get mockData(): Array<MockItem> {
+    public get mockData(): Array<MockItem> {
         return this._mockData ?? Properties.get(Api.MOCK_DATA_PROPERTY, []);
     }
 
-    protected set mockData(value: Array<MockItem>) {
+    public set mockData(value: Array<MockItem>) {
         this._mockData = value;
     }
 
-    protected get apiKey(): string {
+    public get apiKey(): string {
         return this._apiKey ?? Properties.get(Api.API_KEY_PROPERTY, null);
     }
 
-    protected set apiKey(apiKey: string) {
+    public set apiKey(apiKey: string) {
         this._apiKey = apiKey;
     }
 
