@@ -3,6 +3,11 @@ import {Events, Properties} from "../services";
 
 export abstract class Api {
 
+    public static readonly UNEXPECTED_RESPONSE_ERROR_CODE = 1;
+    public static readonly AUTHORIZATION_KEY_MISSING_ERROR_CODE = 2;
+    public static readonly AUTHORIZATION_FAILED_ERROR_CODE = 3;
+    public static readonly SERVICE_FAILED_ERROR_CODE = 4;
+    
     public static readonly CALL_START_EVENT = 'apiCall';
     public static readonly CALL_ERROR_EVENT = 'apiCallError';
     public static readonly CALL_SUCCESS_EVENT = 'apiCallSuccess';
@@ -70,7 +75,7 @@ export abstract class Api {
         }
         const apiKey = this.apiKey;
         if (!apiKey) {
-            this.onApiFail(url,-1,'Api Key is missing !!');
+            this.onApiFail(url, Api.AUTHORIZATION_KEY_MISSING_ERROR_CODE, 'Api Key is missing !!');
         }
         headers['Authorization'] = 'Bearer ' + apiKey;
 
@@ -97,18 +102,22 @@ export abstract class Api {
                 responseObject = await this.fetch({url, headers, method, body});
             }
         } catch (e) {
-            this.onApiFail(url,-1,'Unexpected server error. Message: ' + e.message);
+            this.onApiFail(url, Api.UNEXPECTED_RESPONSE_ERROR_CODE, 'Unexpected server error. Message: ' + e.message);
         }
 
         const statusCode = responseObject.status;
         let response: any = responseObject.response;
 
         if (statusCode != 200) {
-            this.onApiFail(url,-1, `Server responded with incorrect status code (${statusCode})`);
+            if (statusCode === 401) {
+                this.onApiFail(url, Api.AUTHORIZATION_FAILED_ERROR_CODE, 'Authorization failed');
+            } else {
+                this.onApiFail(url, Api.UNEXPECTED_RESPONSE_ERROR_CODE, `Server responded with incorrect status code (${statusCode})`);
+            }
         }
 
         if (!response.success) {
-            this.onApiFail(url,-1, response.message);
+            this.onApiFail(url, Api.SERVICE_FAILED_ERROR_CODE, response.message);
         }
 
         this.onApiSuccess(url, statusCode, response);
