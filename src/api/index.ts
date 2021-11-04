@@ -1,1 +1,1 @@
-export * from './biometrics';
+export * from './liveness';
