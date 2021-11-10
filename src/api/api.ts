@@ -1,4 +1,3 @@
-import {getDeviceData} from "..";
 import {CodeError, MockItem} from "../models";
 import {Events, Properties} from "../services";
 
@@ -75,7 +74,7 @@ export abstract class Api {
             headers['Content-Type'] = 'application/json';
         }
         headers['X-Host'] = location.hostname;
-        headers['X-Device'] = JSON.stringify(getDeviceData());
+        headers['X-Device'] = navigator.userAgent;
         const apiKey = this.apiKey;
         if (!apiKey) {
             this.onApiFail(url, Api.AUTHORIZATION_KEY_MISSING_ERROR_CODE, 'Api Key is missing !!');

@@ -1,6 +1,6 @@
 {
     "name": "biometrics-core",
-    "version": "1.2.2",
+    "version": "1.2.3",
     "description": "",
     "keywords": [],
     "author": "Luis Manuel Amengual",
@@ -36,8 +36,5 @@
         "jest": "^27.3.1",
         "ts-jest": "^27.0.7",
         "typescript": "^4.3.2"
-    },
-    "dependencies": {
-        "device-detector-js": "^3.0.0"
     }
 }
