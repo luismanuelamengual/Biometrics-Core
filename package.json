@@ -1,6 +1,6 @@
 {
     "name": "biometrics-core",
-    "version": "1.2.4",
+    "version": "1.2.5",
     "description": "",
     "keywords": [],
     "author": "Luis Manuel Amengual",
@@ -18,8 +18,9 @@
     ],
     "scripts": {
         "build": "tsc",
+        "tag": "bash ./scripts/tag",
         "test": "jest",
-        "prepublishOnly": "npm run build"
+        "prepublishOnly": "npm run build && npm run tag"
     },
     "jest": {
         "transform": {
